@@ -11,14 +11,13 @@ import Header from './layouts/Header';
 import Footer from './layouts/Footer';
 
 
-function App() {
+function App(props) {
     return (
         <div>
             <BrowserRouter>
                 <Header/>
                 <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/upload" component={Upload} />
+                    <Route exact path="/" component={Upload} />
                     <Route exact path="/view-all" component={View} />
                     <Route exact path="/view-single-user/:id" component={UserView} />
                     <Route exact path="*" component={Error} />

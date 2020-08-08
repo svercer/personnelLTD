@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
-import { Container, Row, Col, Card, Form, Button, FormLabel, FormControl } from 'react-bootstrap'
+import { Container, Row, Col, Card, Form, Button, FormLabel, FormControl, Alert, ProgressBar } from 'react-bootstrap'
 import Axios from 'axios'
+import {withRouter} from 'react-router-dom'
 
-export default class Upload extends Component {
+class Upload extends Component {
     constructor(props) {
         super(props)
         this.state = {
             fileHeader: false,
             csv: '',
+            errorCsv: "",
+            successCsv: "",
+            show: false,
+            uploadPercent: 0,
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -22,28 +27,61 @@ export default class Upload extends Component {
     }
     handleSubmit(e) {
         e.preventDefault()
+        if (this.state.csv == "") {
+            this.setState({
+                errorCsv: "File is required",
+            })
+            return
+        }
+
         const { fileHeader, csv } = this.state
-        console.log('state', this.state)
         let credentials = new FormData();
         credentials.append('fileHeader', fileHeader)
         credentials.append('csv', csv, csv.name )
 
-        Axios.post("/api/add-csv/", credentials, {
+        const option = {
+            onUploadProgress: (progressEvent) => {
+                const { loaded, total } = progressEvent;
+                let percent = Math.floor( ( loaded ) / total)
+                console.log(`${loaded}kb of ${total}kb | ${percent}%`)
+
+                if ( percent < 100) {
+                    this.setState({ uploadPercent: percent })
+                }
+            }
+        }
+        console.log('measuring')
+
+        Axios.post("/api/add-csv/", credentials, option , {
             headers: {
                 "Content-Type": "Application/json",
                 'Accept': '*/*',
             }
         })
         .then(res => {
-            if (res.success === 200) {
-                //
-            } else {
-                //
+            if (res.data.success == 200) {
+                this.setState({
+                    successCsv: "Successfully uploaded",
+                    errorCsv: "",
+                    uploadPercent: 100
+                }, () => {
+                    setTimeout(() => {
+                        this.setState({ uploadPercent : 0})
+                    }, 1000)
+                })
+                // setTimeout(  () => this.props.history.push("/view-all"), 2000 )
+            } else if (res.data.error == "validation") {
+                this.setState({
+                    successCsv: "",
+                    errorCsv: res.message,
+                })
             }
         }).catch(res => console.log("res:", res))
     }
 
     render() {
+        const {uploadPercent} = this.state
+        console.log("uploadPercent", uploadPercent)
         return (
             <Container>
                 <Row className="justify-content-center my-5">
@@ -60,6 +98,20 @@ export default class Upload extends Component {
                                             name='csv'
                                             onChange={this.handleChange}
                                         />
+                                        { uploadPercent > 0 && <ProgressBar active={true} now={uploadPercent} label={`${uploadPercent}%`}  /> }
+                                        {this.state.errorCsv !== '' &&
+                                            <Alert
+                                                className="my-2"
+                                                variant="danger">
+                                                {this.state.errorCsv}
+                                            </Alert>
+                                        }
+                                        {this.state.successCsv !== '' &&
+                                            <Alert
+                                                className="my-3"
+                                                variant="success">
+                                                    {this.state.successCsv}
+                                            </Alert>}
                                     </Form.Group>
                                     <Form.Group>
                                         <Form.Check
@@ -84,3 +136,4 @@ export default class Upload extends Component {
         )
     }
 }
+export default withRouter(Upload)

@@ -10,15 +10,17 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="">
                     <Nav className="mr-auto d-flex ">
-                        <Link className={ 
+                        <Link className={
                             location.pathname == "/" ? "headerLinks active mr-2" : "headerLinks mr-2"}
-                            to="/" 
-                            >Home</Link>
-                        <Link 
-                            className={location.pathname == "/upload" ? "headerLinks active mr-2" : "headerLinks mr-2"} 
-                            to="/upload">Upload</Link>
-                        <Link 
-                            className={location.pathname == "/view-all" ? "headerLinks active mr-2" : "headerLinks mr-2"} 
+                            to="/"
+                            >Upload
+                        </Link>
+                        {/* <Link
+                            className={location.pathname == "/upload" ? "headerLinks active mr-2" : "headerLinks mr-2"}
+                            to="/home">Home
+                        </Link> */}
+                        <Link
+                            className={location.pathname == "/view-all" ? "headerLinks active mr-2" : "headerLinks mr-2"}
                             to="/view-all">
                                 View All
                         </Link>

@@ -35,6 +35,7 @@ class EmployeeController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'error' => 'validation',
+                'message' => $validator->messages()->toArray()
             ]);
         }
 
@@ -46,7 +47,6 @@ class EmployeeController extends Controller
         }
         return response()->json([
             'success' => 200,
-            'request' => $request->all()
         ]);
     }
 
