@@ -6,6 +6,7 @@ use App\Employee;
 use App\Http\Controllers\Controller;
 use App\Imports\UsersImport;
 use App\Imports\UsersNoHeaders;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -70,23 +71,36 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $range)
     {
         $employee = Employee::find($id);
         $lastFive = Employee::where('User', $employee->User)->orderBy('Date', "desc")->limit(5)->get();
         $averageScore = Employee::where('User', $employee->User)->avg('Duration');
-        // $lastFive = [];
 
-        // foreach($array as $row)
-        // {
+        $period = '';
+        if ($range == 1) {
+            $period = 7;
+        } else {
+            $period = 30;
+        }
 
-        // }
+        $averageScoreByRange = Employee::where('User', $employee->User)
+                ->where('Date', '>', Carbon::now()->subDays($period))
+                // ->get();
+                ->avg('Duration');
+        $totalCallDurationByRange = Employee::where('User', $employee->User)
+                ->where('Date', '>', Carbon::now()->subDays($period))
+                // ->get();
+                ->sum('Duration');
 
         return response()->json([
             'success'=> 200,
             'employee' => $employee->User,
             'lastFive' => $lastFive,
             'averagescore' => $averageScore,
+            'range' => $range,
+            'averageScoreByRange' => $averageScoreByRange,
+            'totalCallDurationByRange' => $totalCallDurationByRange,
         ]);
     }
 

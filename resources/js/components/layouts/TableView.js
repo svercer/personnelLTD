@@ -32,7 +32,7 @@ const TableView = ({employees}) => {
                             <td>{employee.Type_of_call}</td>
                             <td>{employee.External_call_score}</td>
 
-                            {location.pathname == "/view-all" && <td><Link to={`/view-single-user?id=${employee.id}`}>view</Link></td>}
+                            {location.pathname == "/view-all" && <td><Link to={`/view-single-user?id=${employee.id}&range=0`}>view</Link></td>}
                         </tr>
                     )
                 })}

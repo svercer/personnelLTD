@@ -19,4 +19,4 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::post("/add-csv", "EmployeeController@store");
 Route::get("/get-all-employees", "EmployeeController@index");
-Route::get("/get-single-employee/{id}", "EmployeeController@show");
+Route::get("/get-single-employee/{id}/{range?}", "EmployeeController@show");
