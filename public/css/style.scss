@@ -1,0 +1,12 @@
+@import "./_scssFiles//variables";
+
+.active {
+    color: blue!important;
+}
+.headerLinks {
+    color: black;
+    &:hover {
+        color: blue;
+        text-decoration: none;
+    }
+}

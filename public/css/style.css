@@ -1,0 +1,13 @@
+.active {
+  color: blue !important;
+}
+
+.headerLinks {
+  color: black;
+}
+
+.headerLinks:hover {
+  color: blue;
+  text-decoration: none;
+}
+/*# sourceMappingURL=style.css.map */

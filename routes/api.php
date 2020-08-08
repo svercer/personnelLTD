@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::post("/add-csv", "EmployeeController@store");
+Route::get("/get-all-employees", "EmployeeController@index");
+Route::get("/get-single-employee/{id}", "EmployeeController@show");
