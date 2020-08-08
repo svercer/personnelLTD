@@ -5,7 +5,7 @@ import { Link, withRouter } from 'react-router-dom'
 const Header = () => {
     return (
         <div>
-            <Navbar bg="light" expand="lg">
+            <Navbar bg="light" expand="lg" fixed="top">
                 <Navbar.Brand href="/">PersonnelLTD</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav" className="">
@@ -21,7 +21,7 @@ const Header = () => {
                         </Link> */}
                         <Link
                             className={location.pathname == "/view-all" ? "headerLinks active mr-2" : "headerLinks mr-2"}
-                            to="/view-all">
+                            to="/view-all?page=1">
                                 View All
                         </Link>
                     </Nav>

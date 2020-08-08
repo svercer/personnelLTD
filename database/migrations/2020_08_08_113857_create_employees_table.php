@@ -17,11 +17,11 @@ class CreateEmployeesTable extends Migration
             $table->id();
             $table->text('User');
             $table->text('Client');
-            $table->text('Client Type');
+            $table->text('Client_type');
             $table->text('Date');
             $table->text('Duration');
-            $table->text('Type Of Call');
-            $table->text('External Call Score');
+            $table->text('Type_of_call');
+            $table->text('External_call_score');
             $table->timestamps();
         });
     }

@@ -42,17 +42,14 @@ class Upload extends Component {
         const option = {
             onUploadProgress: (progressEvent) => {
                 const { loaded, total } = progressEvent;
-                let percent = Math.floor( ( loaded ) / total)
-                console.log(`${loaded}kb of ${total}kb | ${percent}%`)
-
+                let percent = Math.floor( ( loaded * 10 ) / total)
                 if ( percent < 100) {
                     this.setState({ uploadPercent: percent })
                 }
             }
         }
-        console.log('measuring')
 
-        Axios.post("/api/add-csv/", credentials, option , {
+        Axios.post("/api/add-csv/", credentials, option, {
             headers: {
                 "Content-Type": "Application/json",
                 'Accept': '*/*',
@@ -69,7 +66,7 @@ class Upload extends Component {
                         this.setState({ uploadPercent : 0})
                     }, 1000)
                 })
-                // setTimeout(  () => this.props.history.push("/view-all"), 2000 )
+                setTimeout(  () => this.props.history.push("/view-all?page=1"), 2000 )
             } else if (res.data.error == "validation") {
                 this.setState({
                     successCsv: "",
@@ -80,10 +77,9 @@ class Upload extends Component {
     }
 
     render() {
-        const {uploadPercent} = this.state
-        console.log("uploadPercent", uploadPercent)
+        const { uploadPercent } = this.state
         return (
-            <Container>
+            <Container className="margin-top-50" style={{minHeight: '60vh'}}>
                 <Row className="justify-content-center my-5">
                     <Col className="d-flex justify-content-center">
                         <Card style={{ width: '18rem' }} className="w-75">
@@ -98,7 +94,7 @@ class Upload extends Component {
                                             name='csv'
                                             onChange={this.handleChange}
                                         />
-                                        { uploadPercent > 0 && <ProgressBar active={true} now={uploadPercent} label={`${uploadPercent}%`}  /> }
+                                        { uploadPercent > 0 && <ProgressBar animated className="my-3" striped now={uploadPercent} label={`${uploadPercent}%`}  /> }
                                         {this.state.errorCsv !== '' &&
                                             <Alert
                                                 className="my-2"

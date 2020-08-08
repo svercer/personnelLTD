@@ -3,6 +3,14 @@
 .active {
     color: blue!important;
 }
+.margin-top-50 {
+    margin-top: 100px;
+}
+.graph {
+    min-height: 500px;
+    // min-width: 40vw;
+    border: 1px solid black;
+}
 .headerLinks {
     color: black;
     &:hover {

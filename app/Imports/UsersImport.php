@@ -22,11 +22,11 @@ class UsersImport implements ToModel, WithStartRow
         return new Employee([
             "User" => $row[0],
             "Client" => $row[1],
-            "Client Type" => $row[2],
+            "Client_type" => $row[2],
             "Date" => $row[3],
             "Duration" => $row[4],
-            "Type of Call" => $row[5],
-            "External Call Score" => $row[6],
+            "Type_of_call" => $row[5],
+            "External_call_score" => $row[6],
         ]);
     }
 }

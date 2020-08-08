@@ -19,7 +19,7 @@ function App(props) {
                 <Switch>
                     <Route exact path="/" component={Upload} />
                     <Route exact path="/view-all" component={View} />
-                    <Route exact path="/view-single-user/:id" component={UserView} />
+                    <Route exact path="/view-single-user" component={UserView} />
                     <Route exact path="*" component={Error} />
                 </Switch>
                 <Footer/>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Employee;
 use App\Http\Controllers\Controller;
 use App\Imports\UsersImport;
 use App\Imports\UsersNoHeaders;
@@ -15,8 +16,21 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $employees = Employee::paginate(50);
+
+        if ($employees->count() > 0) {
+            return response()->json([
+                'success' => 200,
+                'employees' => $employees
+            ]);
+        } else {
+            return response()->json([
+                'error' => 400,
+                'message' => "No Employees, pleas upload a file"
+            ]);
+        }
 
     }
 
@@ -58,7 +72,22 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
+        $employee = Employee::find($id);
+        $lastFive = Employee::where('User', $employee->User)->orderBy('Date', "desc")->limit(5)->get();
+        $averageScore = Employee::where('User', $employee->User)->avg('Duration');
+        // $lastFive = [];
+
+        // foreach($array as $row)
+        // {
+
+        // }
+
+        return response()->json([
+            'success'=> 200,
+            'employee' => $employee->User,
+            'lastFive' => $lastFive,
+            'averagescore' => $averageScore,
+        ]);
     }
 
     /**
