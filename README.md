@@ -37,7 +37,7 @@ Generate project key
 ```bash
 php artisan key:generate
 ```
-Set Database Credentails
+Set Database credentials 
 
 
 ```bash
