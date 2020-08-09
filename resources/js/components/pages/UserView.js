@@ -73,8 +73,6 @@ export default class UserView extends Component {
                         <Employee
                             data={this.state}
                             dateChange={this.handleChange}
-                            // average={this.state.averageScoreByRange}
-                            // total={this.state.totalCallDurationByRange}
                             />
                     </Col>
                 </Row>

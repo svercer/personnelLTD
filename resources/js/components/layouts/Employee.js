@@ -3,7 +3,7 @@ import { Container, Row, Col, FormControl } from 'react-bootstrap'
 import TableView from './TableView'
 import LineChart from './LineChart'
 
-const Employee = ({ data, dateChange, average, total }) => {
+const Employee = ({ data, dateChange }) => {
     return (
         <Container>
             <Row className="justify-content-center">
@@ -32,11 +32,10 @@ const Employee = ({ data, dateChange, average, total }) => {
                         </Row>
                         <Row style={{minHeight: '30vh'}}>
                             <Col>
-                            {console.log('average', data.totalCallDurationByRange)}
                                 <LineChart average={data.averageScoreByRange} total={data.totalCallDurationByRange} />
                             </Col>
                         </Row>
-                        <Row>
+                        <Row className="mt-5">
                             <Col>
                                 <p> Average: <span className="font-weight-bold"> {data.averageScoreByRange}</span></p>
                             </Col>
