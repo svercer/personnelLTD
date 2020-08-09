@@ -32,7 +32,8 @@ const Employee = ({ data, dateChange, average, total }) => {
                         </Row>
                         <Row style={{minHeight: '30vh'}}>
                             <Col>
-                                <LineChart average={average} total={total} />
+                            {console.log('average', data.totalCallDurationByRange)}
+                                <LineChart average={data.averageScoreByRange} total={data.totalCallDurationByRange} />
                             </Col>
                         </Row>
                         <Row>

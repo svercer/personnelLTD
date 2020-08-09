@@ -33,9 +33,9 @@ export default class UserView extends Component {
                     loaded: true
                 })
                 this.props.history.push(`/view-single-user?id=${id}&range=${range}`)
-                // console.log("employee:", this.state)
+                window.location.reload
             } else if(res.data.error) {
-                this.setState.apply({error: res.data.message, loaded: true})
+                this.setState({error: res.data.message, loaded: true})
             }
         }).catch(res => console.log(res))
     }
@@ -51,12 +51,9 @@ export default class UserView extends Component {
         const { value, name} = e.target
         this.setState({
             [name]:value
-        }, () => this.getEmployee(id, this.state.dateRange)
+        }, () => this.getEmployee(id, this.state.dateRange),
         )
     }
-
-
-
     render() {
         if (!this.state.loaded) {
             return (<Container className="margin-top-50" style={{minHeight: "60vh"}}>
@@ -69,7 +66,6 @@ export default class UserView extends Component {
                 </Row>
             </Container>)
         }
-
         return (
             <Container className="margin-top-50" style={{minHeight: "60vh"}}>
                 <Row>
@@ -77,8 +73,9 @@ export default class UserView extends Component {
                         <Employee
                             data={this.state}
                             dateChange={this.handleChange}
-                            average={this.state.averageScoreByRange}
-                            total={this.state.totalCallDurationByRange} />
+                            // average={this.state.averageScoreByRange}
+                            // total={this.state.totalCallDurationByRange}
+                            />
                     </Col>
                 </Row>
             </Container>
