@@ -1,8 +1,9 @@
 import React from 'react'
 import { Container, Row, Col, FormControl } from 'react-bootstrap'
 import TableView from './TableView'
+import LineChart from './LineChart'
 
-const Employee = ({data, dateChange}) => {
+const Employee = ({ data, dateChange, average, total }) => {
     return (
         <Container>
             <Row className="justify-content-center">
@@ -12,7 +13,7 @@ const Employee = ({data, dateChange}) => {
             </Row>
             <Row>
                 <Col>
-                    <h2 >Average user score: {data.average}</h2>
+                    <h2 >Average user score all time: {data.average}</h2>
                 </Col>
             </Row>
             <Row className="d-flex flex-row justify-content-between">
@@ -25,13 +26,13 @@ const Employee = ({data, dateChange}) => {
                             <Col>
                                 <FormControl as="select" name="dateRange" onChange={dateChange}>
                                     <option value="0">Last week</option>
-                                    <option value="1">Last Month</option>
+                                    <option value="1">Last 30 days</option>
                                 </FormControl>
                             </Col>
                         </Row>
                         <Row style={{minHeight: '30vh'}}>
                             <Col>
-                                Graph will be here
+                                <LineChart average={average} total={total} />
                             </Col>
                         </Row>
                         <Row>

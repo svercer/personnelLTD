@@ -32,7 +32,6 @@ class EmployeeController extends Controller
                 'message' => "No Employees, pleas upload a file"
             ]);
         }
-
     }
 
     /**
@@ -79,22 +78,23 @@ class EmployeeController extends Controller
 
         $period = '';
         if ($range == 1) {
-            $period = 7;
-        } else {
             $period = 30;
+        } else {
+            $period = 7;
         }
 
         $averageScoreByRange = Employee::where('User', $employee->User)
                 ->where('Date', '>', Carbon::now()->subDays($period))
-                // ->get();
                 ->avg('Duration');
+
         $totalCallDurationByRange = Employee::where('User', $employee->User)
-                ->where('Date', '>', Carbon::now()->subDays($period))
-                // ->get();
-                ->sum('Duration');
+            ->where('Date', '>', Carbon::now()->subDays($period))
+            ->sum('Duration');
+
+
 
         return response()->json([
-            'success'=> 200,
+            'success' => 200,
             'employee' => $employee->User,
             'lastFive' => $lastFive,
             'averagescore' => $averageScore,

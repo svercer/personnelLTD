@@ -13,6 +13,7 @@ export default class UserView extends Component {
             average: "",
             error: "",
             averageScoreByRange: "",
+            totalCallDurationByRange: "",
             loaded: false,
             dateRange: "",
         }
@@ -68,13 +69,16 @@ export default class UserView extends Component {
                 </Row>
             </Container>)
         }
-        console.log(this.state)
 
         return (
             <Container className="margin-top-50" style={{minHeight: "60vh"}}>
                 <Row>
                     <Col>
-                        <Employee data={this.state} dateChange={this.handleChange}/>
+                        <Employee
+                            data={this.state}
+                            dateChange={this.handleChange}
+                            average={this.state.averageScoreByRange}
+                            total={this.state.totalCallDurationByRange} />
                     </Col>
                 </Row>
             </Container>
