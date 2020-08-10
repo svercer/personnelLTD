@@ -1,9 +1,21 @@
 import React from 'react'
-import {Table} from "react-bootstrap"
+import {Table, Container, Row, Col} from "react-bootstrap"
 import { each } from 'jquery'
 import { Link } from 'react-router-dom'
 
 const TableView = ({employees}) => {
+
+    if ( !employees ) {
+        return (
+            <Row className="justify-content-center" style={{minHeight: "50vh"}}>
+                <Col className="text-center">
+                    <h1 className="text-center"> No Items to display</h1>
+                </Col>
+            </Row>
+
+        )
+    }
+
     return (
         <Table striped bordered hover size="sm">
             <thead>

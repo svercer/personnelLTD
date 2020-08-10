@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-import Home from './pages/Home';
 import Upload from './pages/Upload';
 import View from './pages/View';
 import UserView from './pages/UserView';
@@ -20,7 +19,7 @@ function App(props) {
                     <Route exact path="/" component={Upload} />
                     <Route exact path="/view-all" component={View} />
                     <Route exact path="/view-single-user" component={UserView} />
-                    <Route exact path="*" component={Error} />
+                    <Route path="*" component={Error} />
                 </Switch>
                 <Footer/>
             </BrowserRouter>

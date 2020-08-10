@@ -26,7 +26,7 @@ const Employee = ({ data, dateChange }) => {
                             <Col>
                                 <FormControl as="select" name="dateRange" onChange={dateChange}>
                                     <option value="0">Last week</option>
-                                    <option value="1">Last 30 days</option>
+                                    <option value="1">Last Month</option>
                                 </FormControl>
                             </Col>
                         </Row>

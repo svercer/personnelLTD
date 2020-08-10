@@ -79,19 +79,24 @@ class EmployeeController extends Controller
         $period = '';
         if ($range == 1) {
             $period = 30;
+            // echo $period;
+            $start_date = Carbon::now()->startOfMonth()->subMonth();
+            $end_date = Carbon::now()->endOfMonth()->subMonth();
         } else {
-            $period = 7;
+            $start_date = Carbon::now()->subWeek()->startOfWeek();
+            $end_date = Carbon::now()->subWeek()->endOfWeek();
         }
 
+
         $averageScoreByRange = Employee::where('User', $employee->User)
-                ->where('Date', '>', Carbon::now()->subDays($period))
+                ->where('Date', '>', $start_date)
+                ->where('Date', '<', $end_date)
                 ->avg('Duration');
 
         $totalCallDurationByRange = Employee::where('User', $employee->User)
-            ->where('Date', '>', Carbon::now()->subDays($period))
+            ->where('Date', '>', $start_date)
+            ->where('Date', '<', $end_date)
             ->sum('Duration');
-
-
 
         return response()->json([
             'success' => 200,

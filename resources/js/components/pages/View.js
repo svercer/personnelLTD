@@ -58,13 +58,13 @@ export default class View extends Component {
         }
         return (
             <Container className="margin-top-50">
+                
                 <Row>
                     <Col>
                         <TableView employees={this.state.users.data}/>
                         <Row className='justify-content-center my-5'>
                             <Col className="d-flex justify-content-center">
                                 <Pagination
-                                    // count={10}
                                     count={this.state.users.last_page}
                                     color="secondary"
                                     page={this.state.users.current_page}
